@@ -6,37 +6,29 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./LocationSelect.css";
 import GetData from "./GetData";
+import axios from "axios";
 
 export default function LocationSelect(props) {
   const [ufLocation, setUfLocation] = useState("");
-  const [disable, setDisable] = useState(true);
-  let uf = null
-  let city = null
+  const [cityData, setCityData] = useState();
+  const [disable, setDisable] = useState(false);
+  let uf = null;
+  let city = null;
 
-  if(props.type === "UF") {
-    const res = GetData("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-    uf = res
+  if (props.type === "UF") {
+    const res = GetData(
+      "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+    );
+    uf = res;
   }
 
-/*   if (ufLocation === "") {
-    const res = GetData(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufLocation}/municipios`)
-    city = res
-    setDisable(false)
-  } */
-
   useEffect(() => {
-      /*   useEffect(() => {
-    axios("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(setLoading(false));
-  }, []); */
-  }, []);
-
+    axios(
+      `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufLocation}/municipios`
+    ).then((response) => {
+      setCityData(response.data);
+    }).finally(console.log(cityData))
+  }, [ufLocation]);
 
   return (
     <div>
@@ -63,6 +55,12 @@ export default function LocationSelect(props) {
               uf.map((uf) => (
                 <MenuItem value={uf} key={uf}>
                   {uf}
+                </MenuItem>
+              ))}
+            {cityData &&
+              cityData.map((city) => (
+                <MenuItem value={city.nome} key={city.nome}>
+                  {city.nome}
                 </MenuItem>
               ))}
           </Select>
