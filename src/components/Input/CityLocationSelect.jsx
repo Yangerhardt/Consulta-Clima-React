@@ -12,7 +12,7 @@ export default function CityLocationSelect(props) {
       <Box sx={{ minWidth: 120, maxWidth: 400 }} padding={2} margin="auto">
         <FormControl fullWidth className="input-control">
           <InputLabel>{props.type}</InputLabel>
-          <CityFormSelect location={"RS"}/>
+          <CityFormSelect/>
         </FormControl>
       </Box>
     </div>
