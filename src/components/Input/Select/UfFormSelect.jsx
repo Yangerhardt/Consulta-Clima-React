@@ -5,7 +5,8 @@ import GetData from "./GetData";
 import { CurrentUfContext } from "../../../context/Store";
 
 const UfFormSelect = (props) => {
-  const { currentUf, setCurrentUf } = useContext(CurrentUfContext);
+  const { currentUf, setCurrentUf, setCurrentCity } =
+    useContext(CurrentUfContext);
 
   // Não usei o useEffect pois o GetData já está com o hook do useFetch
   const res = GetData(
@@ -15,7 +16,7 @@ const UfFormSelect = (props) => {
   return (
     <Select
       value={currentUf}
-      onChange={(e) => setCurrentUf(e.target.value)}
+      onChange={(e) => setCurrentUf(e.target.value) && setCurrentCity("")}
       MenuProps={{
         style: {
           maxHeight: 220,

@@ -1,11 +1,12 @@
-import { Container, Button } from "@mui/material";
 import React from "react";
 import "@fontsource/roboto/500.css";
+import { Container } from "@mui/material";
 import Title from "../components/Title";
 import CityCard from "../components/CityCard";
 import UfLocationSelect from "../components/Input/UfLocationSelect";
 import CityLocationSelect from "../components/Input/CityLocationSelect";
 import Store from "../context/Store";
+import FormButton from "../components/Input/Button/FormButton";
 
 const Home = (props) => {
   return (
@@ -14,13 +15,7 @@ const Home = (props) => {
         <Title title="Consulta Clima" />
         <UfLocationSelect type="UF" />
         <CityLocationSelect type="Cidade" />
-        <Button
-          variant="contained"
-          sx={{ minWidth: 400 }}
-          style={{ marginBottom: "60px", marginTop: "10px" }}
-        >
-          Consultar
-        </Button>
+        <FormButton />
         <CityCard />
       </Container>
     </Store>

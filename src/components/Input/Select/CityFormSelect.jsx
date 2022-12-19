@@ -6,6 +6,7 @@ import { CurrentUfContext } from "../../../context/Store";
 
 const CityFormSelect = (props) => {
   const { currentUf } = useContext(CurrentUfContext);
+  const { setCurrentCity } = useContext(CurrentUfContext);
   const [cityData, setCityData] = useState([]);
   const [formCity, setFormCity] = useState("");
 
@@ -26,7 +27,7 @@ const CityFormSelect = (props) => {
       disabled={currentUf === "" ? true : false}
       value={formCity}
       onChange={(e) => setFormCity(e.target.value)}
-      onBlur={console.log(cityData)}
+      onBlur={(e) => setCurrentCity(e.target.value)}
       MenuProps={{
         style: {
           maxHeight: 220,
