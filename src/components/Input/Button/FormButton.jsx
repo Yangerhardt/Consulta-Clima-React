@@ -5,7 +5,7 @@ import { CurrentUfContext } from "../../../context/Store";
 import getGeolocation from "./getGeolocation";
 
 const FormButton = (props) => {
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState();
   const { currentCity } = useContext(CurrentUfContext);
 
   return (
@@ -13,12 +13,13 @@ const FormButton = (props) => {
       variant="contained"
       sx={{ minWidth: 400 }}
       style={{ marginBottom: "60px", marginTop: "10px" }}
-      onClick={async () =>
+      onClick={async () => {
         currentCity
-          ? setLocation(await getGeolocation(currentCity)[0])
-          : alert("Preencha os campos primeiro")
-      }
+          ? setLocation((await getGeolocation(currentCity))[0])
+          : alert("Preencha os campos primeiro");
+      }}
     >
+      {console.log(location)}
       Consultar
     </Button>
   );
