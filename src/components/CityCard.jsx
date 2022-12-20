@@ -10,6 +10,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+const now = Date.now();
+const today = new Date(now);
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -31,8 +34,8 @@ export default function CityCard(props) {
   return (
     <Card className="card" sx={{ maxWidth: 400 }}>
       <CardHeader
-        title="Shrimp and Chorizo Paella" // Falta mudar o título para o nome da cidade
-        subheader={"September 14, 2016"} // Falta mudar a data para o dia da pesquisa
+        title="Selecione a cidade" // Falta mudar o título para o nome da cidade
+        subheader={today.toLocaleDateString()} // Falta mudar a data para o dia da pesquisa
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
