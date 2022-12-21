@@ -5,17 +5,10 @@ import { CurrentUfContext } from "../../../context/Store";
 import getGeolocation from "./getGeolocation";
 
 const FormButton = (props) => {
-  const [location, setLocation] = useState({latitude: null, longitude: null});
-  const { currentCity, weather, setWeather } = useContext(CurrentUfContext);
+  const [location, setLocation] = useState();
+  const { currentCity, setWeather } = useContext(CurrentUfContext);
 
-  useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-    )
-      .then((response) => response.json())
-      .then((data) => setWeather(data));
-  }, [location]);
-
+  
   return (
     <>
       <Button
@@ -24,10 +17,11 @@ const FormButton = (props) => {
         style={{ marginBottom: "60px", marginTop: "10px" }}
         onClick={async () => {
           currentCity
-            ? setLocation((await getGeolocation(currentCity))[0])
+            ? setLocation((await getGeolocation(currentCity, setWeather, setLocation, location)))
             : alert("Preencha os campos primeiro");
         }}
       >
+        {console.log(location)}
         Consultar
       </Button>
     </>

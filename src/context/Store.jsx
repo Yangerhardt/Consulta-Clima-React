@@ -15,6 +15,7 @@ export default function Store(props) {
         setCurrentCity,
         weather,
         setWeather,
+
       }}
     >
       {props.children}
