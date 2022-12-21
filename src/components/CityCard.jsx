@@ -1,63 +1,40 @@
 import "./CityCard.css";
-import { useState } from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useContext } from "react";
+import { CurrentUfContext } from "../context/Store";
 
 const now = Date.now();
 const today = new Date(now);
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  margin: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+const convertTemperature = (kel) => {
+  const celsius = (kel - 273.15);
+  return celsius;
+};
 
 export default function CityCard(props) {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const { weather, currentCity } = useContext(CurrentUfContext);
 
   return (
     <Card className="card" sx={{ maxWidth: 400 }}>
       <CardHeader
-        title="Selecione a cidade" // Falta mudar o título para o nome da cidade
-        subheader={today.toLocaleDateString()} // Falta mudar a data para o dia da pesquisa
+        title={currentCity || "Selecione a cidade"}
+        subheader={today.toLocaleDateString()} 
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        <Typography variant="body1" color="text.secondary" paddingBottom={1}>
+          Temperatura: {convertTemperature(weather.main.temp).toFixed(2)} °C
         </Typography>
+        <Typography variant="body2" color="text.secondary" padding={1}>
+          Máxima: {convertTemperature(weather.main.temp_max).toFixed(2)} °C
+        </Typography>
+        <Typography variant="body2" color="text.secondary" padding={1}>
+          Mínima: {convertTemperature(weather.main.temp_min).toFixed(2)} °C
+        </Typography>
+        {console.log(weather)}
       </CardContent>
-      <CardActions disableSpacing>
-        <ExpandMore expand={expanded} onClick={handleExpandClick}>
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }
