@@ -6,17 +6,17 @@ import getGeolocation from "./getGeolocation";
 
 const FormButton = (props) => {
   const [location, setLocation] = useState();
-  const { currentCity, weather, setWeather } = useContext(CurrentUfContext);
+  const { currentCity, setWeather, setLoading, loading } =
+    useContext(CurrentUfContext);
 
   useEffect(() => {
-    if (location) {
-      console.log(location);
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-      )
-        .then((response) => response.json())
-        .then((data) => setWeather(data));
-    }
+    if (!location) return;
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+    )
+      .then((response) => response.json())
+      .then((data) => setWeather(data))
+      .finally(setLoading(false));
   }, [location]);
 
   return (
@@ -26,17 +26,15 @@ const FormButton = (props) => {
         sx={{ minWidth: 400 }}
         style={{ marginBottom: "60px", marginTop: "10px" }}
         onClick={async () => {
-          currentCity
-            ? await getGeolocation(
-                currentCity,
-                setWeather,
-                setLocation,
-                location
-              )
-            : alert("Preencha os campos primeiro");
+          if (currentCity) {
+            setLoading(true);
+            setWeather(null);
+            await getGeolocation(currentCity, setLocation);
+          } else {
+            alert("Preencha os campos primeiro");
+          }
         }}
       >
-        {console.log(weather)}
         Consultar
       </Button>
     </>

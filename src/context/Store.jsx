@@ -6,6 +6,7 @@ export default function Store(props) {
   const [currentUf, setCurrentUf] = useState("");
   const [currentCity, setCurrentCity] = useState("");
   const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
   return (
     <CurrentUfContext.Provider
       value={{
@@ -15,7 +16,8 @@ export default function Store(props) {
         setCurrentCity,
         weather,
         setWeather,
-
+        loading,
+        setLoading,
       }}
     >
       {props.children}

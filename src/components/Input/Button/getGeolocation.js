@@ -1,4 +1,4 @@
-const getGeolocation = async (city, setWeather, setLocation, location) => {
+const getGeolocation = async (city, setLocation) => {
   if (city === "") {
     console.error("Cidade não definida");
   } else {

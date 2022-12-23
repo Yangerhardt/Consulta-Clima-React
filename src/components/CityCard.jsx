@@ -5,12 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import { useContext } from "react";
 import { CurrentUfContext } from "../context/Store";
 import CityCardContext from "./CityCardContext";
+import Loading from "./Loading";
 
 const now = Date.now();
 const today = new Date(now);
 
 export default function CityCard(props) {
-  const { weather, currentCity } = useContext(CurrentUfContext);
+  const { weather, currentCity, loading } = useContext(CurrentUfContext);
 
   return (
     <Card className="card" sx={{ maxWidth: 400 }}>
@@ -26,6 +27,7 @@ export default function CityCard(props) {
             min={weather.main.temp_min}
           />
         ) : null}
+        {loading ? <Loading /> : null}
       </CardContent>
     </Card>
   );
