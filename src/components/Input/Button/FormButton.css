@@ -1,0 +1,16 @@
+.search-button {
+  min-width: 400px !important;
+  background-color: #365166 !important;
+}
+
+@media (max-width: 820px) {
+  .search-button {
+    min-width: 300px !important;
+  }
+}
+
+@media (max-width: 660px) {
+  .search-button {
+    min-width: 200px !important;
+  }
+}

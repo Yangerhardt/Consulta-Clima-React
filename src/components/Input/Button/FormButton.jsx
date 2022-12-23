@@ -23,7 +23,7 @@ const FormButton = (props) => {
     <>
       <Button
         variant="contained"
-        sx={{ minWidth: 400 }}
+        className="search-button"
         style={{ marginBottom: "60px", marginTop: "10px" }}
         onClick={async () => {
           if (currentCity) {

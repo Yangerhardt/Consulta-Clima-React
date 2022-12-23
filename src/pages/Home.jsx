@@ -1,3 +1,4 @@
+import "./Home.css"
 import React from "react";
 import "@fontsource/roboto/500.css";
 import { Container } from "@mui/material";
@@ -11,12 +12,14 @@ import FormButton from "../components/Input/Button/FormButton";
 const Home = (props) => {
   return (
     <Store>
-      <Container>
-        <Title title="Consulta Clima" />
-        <UfLocationSelect type="UF" />
-        <CityLocationSelect type="Cidade" />
-        <FormButton />
-        <CityCard />
+      <Container style={{ height: "100vh" }}>
+        <div className="content-container">
+          <Title title="Consulta Clima" />
+          <UfLocationSelect type="UF" />
+          <CityLocationSelect type="Cidade" />
+          <FormButton />
+          <CityCard />
+        </div>
       </Container>
     </Store>
   );
