@@ -5,8 +5,7 @@ import axios from "axios";
 import { CurrentUfContext } from "../../../context/Store";
 
 const CityFormSelect = (props) => {
-  const { currentUf } = useContext(CurrentUfContext);
-  const { setCurrentCity } = useContext(CurrentUfContext);
+  const { currentUf, setCurrentCity } = useContext(CurrentUfContext);
   const [cityData, setCityData] = useState([]);
   const [formCity, setFormCity] = useState("");
 

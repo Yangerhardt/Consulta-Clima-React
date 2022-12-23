@@ -6,7 +6,7 @@ import getGeolocation from "./getGeolocation";
 
 const FormButton = (props) => {
   const [location, setLocation] = useState();
-  const { currentCity, setWeather, setLoading, loading } =
+  const { currentCity, setWeather, setLoading } =
     useContext(CurrentUfContext);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const FormButton = (props) => {
     <>
       <Button
         variant="contained"
-        className="search-button"
+        className="searc-button"
         style={{ marginBottom: "60px", marginTop: "10px" }}
         onClick={async () => {
           if (currentCity) {
