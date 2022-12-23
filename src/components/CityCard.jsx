@@ -10,7 +10,7 @@ const now = Date.now();
 const today = new Date(now);
 
 export default function CityCard(props) {
-  const { weather, loading, currentCity } = useContext(CurrentUfContext);
+  const { weather, currentCity } = useContext(CurrentUfContext);
 
   return (
     <Card className="card" sx={{ maxWidth: 400 }}>
@@ -19,7 +19,7 @@ export default function CityCard(props) {
         subheader={today.toLocaleDateString()}
       />
       <CardContent>
-        {currentCity && loading ? (
+        {weather ? (
           <CityCardContext
             temp={weather.main.temp}
             max={weather.main.temp_max}

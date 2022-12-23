@@ -14,15 +14,6 @@ const getGeolocation = async (city, setWeather, setLocation, location) => {
     )
       .then((response) => response.json())
       .then((data) => setLocation(data[0]));
-
-    if (location !== null) {
-      console.log(location);
-/*       await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-      )
-        .then((response) => response.json())
-        .then((data) => setWeather(data)); */
-    }
   }
 };
 
